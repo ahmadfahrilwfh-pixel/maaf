@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Permohonan Maaf</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Elegance - Romantic Wedding Planning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #FFB6C1;
-            --secondary-color: #FFD1DC;
-            --accent-color: #FF69B4;
-            --text-color: #333;
-            --light-text: #666;
-            --background-color: #FFF0F5;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --transition-speed: 0.3s;
+            /* Color Palette */
+            --bg-color: #FFF9FA; /* Very soft pink/white background */
+            --card-bg: #FFFFFF;
+            --soft-pink: #FFD1DC;
+            --accent-pink: #FFB6C1;
+            --gold: #D4AF37;
+            --light-gold: #FDF8E7;
+            --text-main: #4A4A4A;
+            --text-muted: #7A7A7A;
+            
+            /* Soft UI Shadows */
+            --soft-shadow: 0 15px 35px rgba(255, 182, 193, 0.15);
+            --hover-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+            
+            --transition: all 0.3s ease-in-out;
         }
 
         * {
@@ -25,341 +32,348 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            min-height: 100vh;
-            display: flex;
-            justify-center: center;
-            align-items: center;
-            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
             overflow-x: hidden;
-            transition: background-color var(--transition-speed) ease;
         }
 
-        .page {
-            max-width: 600px;
-            width: 100%;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px var(--shadow-color);
-            padding: 40px;
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+        }
+
+        /* --- Header & Hero Section --- */
+        header {
             text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
-            position: relative;
-            overflow: hidden;
+            padding: 80px 20px 60px;
+            background: linear-gradient(180deg, var(--light-gold) 0%, var(--bg-color) 100%);
         }
 
-        .page.active {
-            opacity: 1;
-            transform: translateY(0);
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: var(--gold);
         }
 
-        h1 {
-            color: var(--text-color);
-            font-weight: 600;
-            margin-bottom: 20px;
-            font-size: 2.2rem;
-            position: relative;
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
             display: inline-block;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-family: 'Poppins', sans-serif;
         }
 
-        h1::after {
+        .btn-primary {
+            background-color: var(--accent-pink);
+            color: white;
+            box-shadow: 0 10px 20px rgba(255, 182, 193, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--gold);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* --- Global Section Style --- */
+        section {
+            padding: 80px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
             content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
+            display: block;
             width: 60px;
-            height: 4px;
-            background: var(--accent-color);
+            height: 3px;
+            background: var(--accent-pink);
+            margin: 15px auto 0;
             border-radius: 2px;
         }
 
-        p {
-            color: var(--light-text);
-            line-height: 1.8;
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+        /* --- Portfolio Gallery --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
 
-        img {
-            max-width: 100%;
-            border-radius: 16px;
-            margin: 25px 0;
-            box-shadow: 0 8px 20px var(--shadow-color);
-            transition: transform var(--transition-speed) ease;
-        }
-
-        img:hover {
-            transform: scale(1.02);
-        }
-
-        .buttons {
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            position: relative;
-        }
-
-        button {
-            padding: 14px 28px;
-            font-size: 1rem;
-            font-weight: 500;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all var(--transition-speed) ease;
-            position: relative;
+        .gallery-item {
+            border-radius: 20px;
             overflow: hidden;
-            z-index: 2;
+            box-shadow: var(--soft-shadow);
+            transition: var(--transition);
+            position: relative;
+            background: var(--card-bg);
+            padding: 10px;
         }
 
-        .btn-yes {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--text-color);
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
-        }
-
-        .btn-yes:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
-        }
-
-        .btn-no {
-            background: linear-gradient(135deg, #FFE4E1, #FFF0F5);
-            color: var(--accent-color);
-            border: 2px dashed var(--accent-color);
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
-        }
-
-        .btn-no:hover {
-            transform: scale(1.05);
-            background: linear-gradient(135deg, #FFF0F5, #FFE4E1);
-            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.3);
-        }
-
-        .btn-no:active {
-            transform: scale(0.98);
-        }
-
-        /* Floating hearts decoration */
-        .hearts {
-            position: absolute;
-            top: -10%;
-            left: 0;
+        .gallery-item img {
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: var(--transition);
         }
 
-        .heart {
-            position: absolute;
-            bottom: -10%;
-            width: 20px;
-            height: 20px;
-            background-color: var(--accent-color);
-            transform: rotate(45deg);
-            animation: floatUp var(--transition-speed)s ease-in infinite;
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
         }
 
-        .heart::before,
-        .heart::after {
-            content: "";
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: var(--accent-color);
-            border-radius: 50%;
+        .gallery-item:hover img {
+            transform: scale(1.03);
         }
 
-        .heart::before {
-            top: -10px;
-            left: 0;
+        /* --- Vendor Directory --- */
+        .vendor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
-        .heart::after {
-            left: 10px;
-            top: 0;
+        .vendor-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: var(--soft-shadow);
+            border: 1px solid rgba(255, 209, 220, 0.3);
+            transition: var(--transition);
         }
 
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(45deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-800px) rotate(45deg);
-                opacity: 0;
-            }
+        .vendor-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
         }
 
-        /* Enhanced apology text */
-        .apology-text {
-            font-style: italic;
-            color: var(--accent-color);
-            font-weight: 500;
-            margin-top: 20px;
+        .vendor-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .vendor-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-main);
+        }
+
+        /* --- Planning Tools Showcase --- */
+        .tools-container {
+            background: linear-gradient(135deg, var(--card-bg), var(--light-gold));
+            border-radius: 30px;
+            padding: 60px 40px;
+            box-shadow: var(--soft-shadow);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .tool-item {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .tool-item h3 {
+            font-size: 1.2rem;
+            margin: 15px 0 10px;
+            color: var(--gold);
+        }
+
+        .tool-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Contact Form --- */
+        .contact-section {
+            background-color: white;
+            border-top: 1px solid var(--soft-pink);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: var(--soft-shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #F5F5F5;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: var(--text-main);
+            transition: var(--transition);
+            background: #FAFAFA;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-pink);
+            background: white;
+            box-shadow: 0 0 10px rgba(255, 182, 193, 0.2);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            font-size: 1.1rem;
+            background: linear-gradient(45deg, var(--accent-pink), var(--gold));
+            color: white;
+            border: none;
             padding: 15px;
-            background: linear-gradient(135deg, rgba(255, 182, 193, 0.1), rgba(255, 209, 220, 0.1));
-            border-radius: 12px;
-            border-left: 4px solid var(--accent-color);
+            border-radius: 15px;
         }
 
-        /* Responsive design */
-        @media (max-width: 480px) {
-            .page {
-                padding: 25px;
-                margin: 10px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            p {
-                font-size: 1rem;
-            }
-            
-            button {
-                padding: 12px 20px;
-                font-size: 0.9rem;
-            }
+        .submit-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: var(--bg-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            section { padding: 50px 5%; }
+            .tools-container { padding: 40px 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- Hearts container -->
-    <div class="hearts" id="heartsContainer"></div>
 
-    <div class="page" id="page1">
-        <h1>Maafkan Aku</h1>
-        <p>Aku tahu aku salah, dan aku ingin meminta maaf dari lubuk hatiku yang paling dalam. Maukah kamu memberiku kesempatan lagi untuk memperbaiki semuanya?</p>
-        <button onclick="nextPage()">Buka Surat Permohonan Maaf</button>
-    </div>
+    <header>
+        <h1 class="hero-title">Wujudkan Pernikahan Impianmu</h1>
+        <p class="hero-subtitle">Mulai dari konsep desain romantis hingga eksekusi sempurna. Kami hadir untuk membuat hari bahagiamu menjadi memori yang tak terlupakan.</p>
+        <a href="#contact" class="btn btn-primary">Mulai Konsultasi Gratis</a>
+    </header>
 
-    <div class="page" id="page2" style="display:none;">
-        <h1>Dari Lubuk Hatiku</h1>
-        <p>Setiap momen bersamamu sangat berarti bagiku. Aku menyesali kesalahanku dan ingin kita kembali seperti semula.</p>
-
-        <div>
-            <img src="https://via.placeholder.com/600x400/FFB6C1/FFFFFF?text=Kenangan+Kita" alt="Kenangan kita">
-            <p>Foto ini mengingatkanku pada semua kebahagiaan yang kita rasakan bersama. Setiap senyum, setiap pelukan, dan setiap detik yang kita bagikan adalah harta yang tak ternilai bagiku.</p>
+    <section id="portfolio">
+        <h2 class="section-title">Galeri Momen</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dekorasi Pernikahan">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cincin Pernikahan">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Resepsi Memukau">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Buket Bunga">
+            </div>
         </div>
+    </section>
 
-        <div class="apology-text">
-            Aku benar-benar menyesal atas semua yang telah kulakukan. Aku tidak sempat merasa betapa besarnya kesalahanku sampai sekarang, dan aku berjanji untuk menjadi versi yang lebih baik dari diriku sendiri - untukmu dan untuk kita.
+    <section id="vendors" style="background-color: white;">
+        <h2 class="section-title">Direktori Vendor Terkurasi</h2>
+        <div class="vendor-grid">
+            <div class="vendor-card">
+                <div class="vendor-icon">🏰</div>
+                <h3>Venue Elegan</h3>
+                <p>Temukan lokasi pernikahan eksklusif mulai dari ballroom mewah hingga taman outdoor yang romantis.</p>
+            </div>
+            <div class="vendor-card">
+                <div class="vendor-icon">📸</div>
+                <h3>Fotografi Memori</h3>
+                <p>Abadikan setiap tawa dan air mata bahagia dengan fotografer profesional terbaik di kota.</p>
+            </div>
+            <div class="vendor-card">
+                <div class="vendor-icon">🌸</div>
+                <h3>Dekorasi & Florist</h3>
+                <p>Rangkaian bunga segar dan palet warna memukau yang disesuaikan dengan tema personal Anda.</p>
+            </div>
         </div>
+    </section>
 
-        <div class="buttons">
-            <a href="https://wa.me/NOMORANDA?text=Aku%20memaafkanmu%20dan%20kita%20bisa%20balikan." target="_blank">
-                <button class="btn-yes">Mau Balikan</button>
-            </a>
-            <button class="btn-no" id="btnNo">Nggak Mau</button>
-        </div
-    </div>
+    <section id="tools">
+        <h2 class="section-title">Alat Perencana Pintar</h2>
+        <div class="tools-container">
+            <div class="tool-item">
+                <div style="font-size: 2rem;">📋</div>
+                <h3>Checklist Cerdas</h3>
+                <p>Panduan langkah demi langkah agar tidak ada detail yang terlewat.</p>
+            </div>
+            <div class="tool-item">
+                <div style="font-size: 2rem;">💰</div>
+                <h3>Kalkulator Budget</h3>
+                <p>Pantau pengeluaran dan sesuaikan dengan anggaran impian Anda.</p>
+            </div>
+            <div class="tool-item">
+                <div style="font-size: 2rem;">💌</div>
+                <h3>Manajemen Tamu</h3>
+                <p>Atur daftar undangan dan RSVP secara digital dengan mudah.</p>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        function nextPage() {
-            const page1 = document.getElementById('page1');
-            const page2 = document.getElementById('page2');
-            
-            page1.classList.remove('active');
-            page1.style.display = 'none';
-            
-            // Trigger reflow for transition
-            void page1.offsetWidth;
-            
-            page2.style.display = 'block';
-            void page2.offsetWidth;
-            page2.classList.add('active');
-            
-            // Create floating hearts
-            createHearts();
-        }
+    <section id="contact" class="contact-section">
+        <h2 class="section-title">Rencanakan Bersama Kami</h2>
+        <div class="contact-form">
+            <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Terima kasih! Tim kami akan segera menghubungi Anda.');">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nama Pasangan" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Alamat Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="date" class="form-control" title="Rencana Tanggal Pernikahan" required>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" placeholder="Ceritakan konsep pernikahan impian Anda..." required></textarea>
+                </div>
+                <button type="submit" class="btn submit-btn">Kirim Pesan</button>
+            </form>
+        </div>
+    </section>
 
-        function createHearts() {
-            const container = document.getElementById('heartsContainer');
-            // Clear existing hearts
-            container.innerHTML = '';
-            
-            // Create 15 hearts
-            for (let i = 0; i < 15; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                
-                // Random position
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                heart.style.animationDelay = (Math.random() * 5) + 's';
-                heart.style.opacity = Math.random() * 0.6 + 0.4;
-                
-                // Random size
-                const size = Math.random() * 15 + 10;
-                heart.style.width = size + 'px';
-                heart.style.height = size + 'px';
-                
-                container.appendChild(heart);
-            }
-        }
+    <footer>
+        <p>&copy; 2026 Elegance Wedding Planner. Didesain dengan penuh cinta.</p>
+    </footer>
 
-        function moveButton() {
-            const btn = document.getElementById('btnNo');
-            const container = btn.parentElement;
-            
-            // Get container dimensions
-            const containerRect = container.getBoundingClientRect();
-            const btnRect = btn.getBoundingClientRect();
-            
-            // Calculate maximum movement within container
-            const maxX = containerRect.width - btnRect.width - 20; // 20px padding
-            const maxY = containerRect.height - btnRect.height - 20; // 20px padding
-            
-            // Ensure we don't go negative
-            const safeMaxX = Math.max(20, maxX);
-            const safeMaxY = Math.max(20, maxY);
-            
-            // Random position within bounds
-            const x = Math.random() * safeMaxX;
-            const y = Math.random() * safeMaxY;
-            
-            // Apply smooth transition
-            btn.style.transition = 'all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)';
-            btn.style.transform = `translate(${x}px, ${y}px)`;
-            
-            // Add slight rotation for fun
-            btn.style.transform += ` rotate(${Math.random() * 20 - 10}deg)`;
-        }
-
-        // Add event listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            // Show first page
-            const page1 = document.getElementById('page1');
-            void page1.offsetWidth;
-            page1.classList.add('active');
-            
-            // Add hover event to button
-            const btnNo = document.getElementById('btnNo');
-            btnNo.addEventListener('mouseover', moveButton);
-            btnNo.addEventListener('touchstart', moveButton);
-            
-            // Reset transition on mouseout
-            btnNo.addEventListener('mouseout', function() {
-                btn.style.transition = 'all 0.3s ease';
-                btn.style.transform = 'translate(0px, 0px) rotate(0deg)';
-            });
-        });
-    </script>
 </body>
 </html>
