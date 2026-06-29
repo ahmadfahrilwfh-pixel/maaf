@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permohonan Maaf</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f9f9f9; margin: 0; padding: 20px; }
+        .page { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        p { color: #666; line-height: 1.6; }
+        img { max-width: 100%; height: auto; border-radius: 8px; margin-top: 15px; }
+        .buttons { margin-top: 30px; position: relative; }
+        button { padding: 10px 20px; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; margin: 10px; }
+        .btn-yes { background-color: #4CAF50; color: white; }
+        .btn-no { background-color: #f44336; color: white; position: absolute; }
+    </style>
+</head>
+<body>
+
+    <div class="page" id="page1">
+        <h1>Maafkan Aku</h1>
+        <p>Aku tahu aku salah, dan aku ingin meminta maaf dari lubuk hatiku yang paling dalam. Maukah kamu memberiku kesempatan lagi untuk memperbaiki semuanya?</p>
+        <button onclick="nextPage()">Buka Surat Permohonan Maaf</button>
+    </div>
+
+    <div class="page" id="page2" style="display:none;">
+        <h1>Dari Lubuk Hatiku</h1>
+        <p>Setiap momen bersamamu sangat berarti bagiku. Aku menyesali kesalahanku dan ingin kita kembali seperti semula.</p>
+        
+        <div>
+            <img src="https://via.placeholder.com/600x400" alt="Kenangan kita">
+            <p>Caption untuk foto ini...</p>
+        </div>
+
+        <div class="buttons">
+            <a href="https://wa.me/NOMORANDA?text=Aku%20memaafkanmu%20dan%20kita%20bisa%20balikan."><button class="btn-yes">Mau Balikan</button></a>
+            <button class="btn-no" id="btnNo" onmouseover="moveButton()">Nggak Mau</button>
+        </div>
+    </div>
+
+    <script>
+        function nextPage() {
+            document.getElementById('page1').style.display = 'none';
+            document.getElementById('page2').style.display = 'block';
+        }
+
+        function moveButton() {
+            const btn = document.getElementById('btnNo');
+            const x = Math.random() * (window.innerWidth - 200);
+            const y = Math.random() * (window.innerHeight - 100);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+    </script>
+</body>
+</html>
