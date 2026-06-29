@@ -3,55 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Permohonan Maaf</title>
+    <title>Surat Terbuka Dari Lubuk Hatiku</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #f9f9f9; margin: 0; padding: 20px; }
-        .page { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h1 { color: #333; }
-        p { color: #666; line-height: 1.6; }
-        img { max-width: 100%; height: auto; border-radius: 8px; margin-top: 15px; }
-        .buttons { margin-top: 30px; position: relative; }
-        button { padding: 10px 20px; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; margin: 10px; }
-        .btn-yes { background-color: #4CAF50; color: white; }
-        .btn-no { background-color: #f44336; color: white; position: absolute; }
+        :root {
+            --bg-gradient: linear-gradient(135deg, #fff0f2 0%, #fce4ec 100%);
+            --card-bg: #ffffff;
+            --text-title: #2c3e50;
+            --text-body: #5a6c7d;
+            --accent-pink: #ff6584;
+            --accent-pink-hover: #ff476c;
+            --accent-teal: #2ec4b6;
+            --accent-teal-hover: #20a396;
+            --shadow-soft: 0 15px 35px rgba(255, 101, 132, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .card-container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 460px;
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            animation: cardEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: scale(0.9) translateY(30px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        h1 {
+            color: var(--text-title);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        p {
+            color: var(--text-body);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 26px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            width: 100%;
+        }
+
+        .btn-start {
+            background-color: var(--accent-pink);
+            color: white;
+        }
+
+        .btn-start:hover {
+            background-color: var(--accent-pink-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 101, 132, 0.35);
+        }
+
+        .img-wrapper {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.04);
+        }
+
+        .caption-text {
+            font-size: 13px;
+            font-style: italic;
+            color: var(--accent-pink);
+            margin-top: -10px;
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .buttons-wrapper {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            min-height: 110px;
+        }
+
+        .btn-yes {
+            background-color: var(--accent-teal);
+            color: white;
+            z-index: 2;
+        }
+
+        .btn-yes:hover {
+            background-color: var(--accent-teal-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(46, 196, 182, 0.35);
+        }
+
+        .btn-no {
+            background-color: #f1f3f5;
+            color: #748ffc;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 100%;
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 10;
+        }
+
+        /* Kelas transisi animasi halaman */
+        .fade-out {
+            opacity: 0;
+            transform: scale(0.95) translateY(-20px);
+        }
+
+        @media (max-width: 480px) {
+            .card-container {
+                padding: 30px 20px;
+            }
+            h1 { font-size: 21px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="page" id="page1">
-        <h1>Maafkan Aku</h1>
-        <p>Aku tahu aku salah, dan aku ingin meminta maaf dari lubuk hatiku yang paling dalam. Maukah kamu memberiku kesempatan lagi untuk memperbaiki semuanya?</p>
-        <button onclick="nextPage()">Buka Surat Permohonan Maaf</button>
+    <div class="card-container" id="page1">
+        <h1>Boleh Aku Minta Waktumu <br>Sebentar Saja? 🤍</h1>
+        <p>Aku tahu beberapa waktu terakhir ini segalanya terasa melelahkan, dan ego serta kesalahanku telah menggores luka di hatimu. Lewat lembaran digital kecil ini, izinkan aku menyampaikan sesuatu yang jujur dari hatiku...</p>
+        <button class="btn btn-start" onclick="nextPage()">Buka Surat Permohonan Maaf</button>
     </div>
 
-    <div class="page" id="page2" style="display:none;">
-        <h1>Dari Lubuk Hatiku</h1>
-        <p>Setiap momen bersamamu sangat berarti bagiku. Aku menyesali kesalahanku dan ingin kita kembali seperti semula.</p>
+    <div class="card-container" id="page2" style="display:none;">
+        <h1>Dari Lubuk Hatiku Yang Terdalam...</h1>
+        <p>Setiap tawa, cerita, dan momen bersamamu adalah bagian terindah dalam hidupku. Aku sangat menyesali apa yang terjadi dan tidak ingin kehilanganmu. Maukah kamu memaafkanku dan memberi satu kesempatan lagi untuk memperbaiki semuanya?</p>
         
-        <div>
-            <img src="https://via.placeholder.com/600x400" alt="Kenangan kita">
-            <p>Caption untuk foto ini...</p>
+        <div class="img-wrapper">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=600&auto=format&fit=crop" alt="Kenangan kita">
         </div>
+        <p class="caption-text">"Aku rindu momen-momen hangat kita yang dulu..."</p>
 
-        <div class="buttons">
-            <a href="https://wa.me/NOMORANDA?text=Aku%20memaafkanmu%20dan%20kita%20bisa%20balikan."><button class="btn-yes">Mau Balikan</button></a>
-            <button class="btn-no" id="btnNo" onmouseover="moveButton()">Nggak Mau</button>
+        <div class="buttons-wrapper">
+            <a href="https://wa.me/NOMORANDA?text=Aku%20memaafkanmu%20dan%20kita%20bisa%20memulai%20lagi%20dari%20awal%20%E2%9C%A8" style="width: 100%; text-decoration: none;">
+                <button class="btn btn-yes">Iya, Aku Maafin & Balikan ✨</button>
+            </a>
+            <button class="btn btn-no" id="btnNo" onmouseover="moveButton()" onclick="moveButton()">Nggak Mau ❌</button>
         </div>
     </div>
 
     <script>
         function nextPage() {
-            document.getElementById('page1').style.display = 'none';
-            document.getElementById('page2').style.display = 'block';
+            const p1 = document.getElementById('page1');
+            const p2 = document.getElementById('page2');
+            
+            // Animasi menghilang halus pada halaman pertama
+            p1.classList.add('fade-out');
+            
+            setTimeout(() => {
+                p1.style.display = 'none';
+                p2.style.display = 'block';
+                // Trigger reflow browser agar animasi entrance halaman kedua berjalan
+                p2.style.opacity = '0';
+                p2.style.transform = 'scale(0.95) translateY(20px)';
+                setTimeout(() => {
+                    p2.style.opacity = '1';
+                    p2.style.transform = 'scale(1) translateY(0)';
+                    p2.style.transition = 'all 0.5s ease';
+                }, 50);
+            }, 400);
         }
 
         function moveButton() {
             const btn = document.getElementById('btnNo');
-            const x = Math.random() * (window.innerWidth - 200);
-            const y = Math.random() * (window.innerHeight - 100);
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+            
+            // Batasan aman (padding) agar tombol tidak memotong tepi layar browser
+            const padding = 60;
+            
+            // Hitung lebar dan tinggi maksimal area viewport yang aman digunakan
+            const maxX = window.innerWidth - btn.offsetWidth - padding;
+            const maxY = window.innerHeight - btn.offsetHeight - padding;
+            
+            // Buat titik acak yang aman di dalam rentang layar komputer/HP
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+            
+            // Ubah posisi menjadi fixed dengan transisi CSS agar pergerakannya mulus (tidak patah-patah)
+            btn.style.position = 'fixed';
+            btn.style.width = btn.offsetWidth + 'px'; // Kunci ukuran lebar asli tombol saat melayang
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+            btn.style.margin = '0';
         }
-    </script>
+    </style>
 </body>
 </html>
