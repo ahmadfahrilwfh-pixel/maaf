@@ -23,7 +23,6 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            /* Mencegah highlight biru saat tombol dipencet di HP */
             -webkit-tap-highlight-color: transparent; 
         }
 
@@ -38,7 +37,7 @@
             position: relative;
         }
 
-        /* Latar Belakang Hati */
+        /* --- Animasi Background Hati --- */
         .hearts-bg {
             position: fixed;
             top: 0;
@@ -60,11 +59,49 @@
             100% { transform: translateY(-100vh) scale(1.5) rotate(360deg); opacity: 0; }
         }
 
+        /* --- Animasi Pop-up Karakter di Sudut --- */
+        #corner-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .corner-char {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            opacity: 0;
+            transform: scale(0);
+            animation: popInOut 3.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popInOut {
+            0% { transform: scale(0) rotate(-15deg); opacity: 0; }
+            15% { transform: scale(1.1) rotate(5deg); opacity: 1; }
+            30% { transform: scale(1) rotate(0deg); opacity: 1; }
+            70% { transform: scale(1) rotate(0deg); opacity: 1; }
+            85% { transform: scale(1.1) rotate(-5deg); opacity: 1; }
+            100% { transform: scale(0) rotate(15deg); opacity: 0; }
+        }
+
+        .pos-tl { top: 20px; left: 20px; transform-origin: top left; }
+        .pos-tr { top: 20px; right: 20px; transform-origin: top right; }
+        .pos-bl { bottom: 20px; left: 20px; transform-origin: bottom left; }
+        .pos-br { bottom: 20px; right: 20px; transform-origin: bottom right; }
+
         /* --- STYLE KARTU UTAMA --- */
         .card-container {
             background: var(--card-bg);
             width: 100%;
-            max-width: 440px;
+            max-width: 460px;
             max-height: 90vh;
             overflow-y: auto;
             padding: 35px 25px;
@@ -85,10 +122,10 @@
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* --- FOTO LOOPY & NAILONG DI TENGAH (MENGGANTIKAN AREA KOSONG) --- */
+        /* --- FOTO TENGAH --- */
         .main-char-img {
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             object-fit: cover;
             border-radius: 25px;
             border: 5px solid white;
@@ -110,16 +147,12 @@
             width: 100px;
             height: 100px;
             object-fit: cover;
-            border-radius: 50%; /* Dibuat bulat agar lebih imut */
+            border-radius: 50%;
             border: 4px solid white;
             box-shadow: 0 8px 15px rgba(0,0,0,0.1);
             animation: floatUpDown 3s ease-in-out infinite;
         }
-        
-        /* Animasi delay agar gerakannya beda */
-        .char-couple img:nth-child(2) {
-            animation-delay: 1.5s;
-        }
+        .char-couple img:nth-child(2) { animation-delay: 1.5s; }
 
         @keyframes floatUpDown {
             0%, 100% { transform: translateY(0); }
@@ -141,6 +174,7 @@
             margin-bottom: 25px;
         }
         .highlight { color: var(--loopy-pink); font-weight: 700; }
+        .memory-text { font-style: italic; font-weight: 600; color: #ff8fa3; }
 
         /* Slideshow */
         .slideshow-wrapper {
@@ -221,23 +255,22 @@
             min-height: 120px;
         }
 
-        /* TOMBOL NGGAK MAU (SUPER KABUR) */
+        /* TOMBOL NGGAK MAU - FIX MOBILE */
         .btn-no {
             background-color: #f1f3f5;
             color: #868e96;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            /* Memastikan tombol tidak berubah ukuran/melar */
-            width: max-content !important; 
-            min-width: 200px;
+            /* Ukuran fixed agar tidak melebar/rusak saat lari */
+            width: 220px !important; 
+            height: 50px;
             white-space: nowrap;
             margin: 0 auto;
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            /* Transisi cepat agar langsung menghilang sebelum di-klik */
-            transition: left 0.1s ease, top 0.1s ease; 
-            z-index: 100;
+            transition: left 0.15s ease-out, top 0.15s ease-out; 
+            z-index: 9999; /* Pastikan selalu paling atas */
         }
 
         .fade-out { opacity: 0 !important; transform: scale(0.9) translateY(-30px) !important; }
@@ -245,21 +278,30 @@
         @media (max-width: 480px) {
             .card-container { padding: 30px 20px; }
             h1 { font-size: 20px; }
-            .main-char-img { width: 110px; height: 110px; }
+            .main-char-img { width: 120px; height: 120px; }
             .char-couple img { width: 85px; height: 85px; }
             .slideshow-wrapper { height: 180px; }
+            
+            /* Sudut untuk HP */
+            .corner-char { width: 70px; height: 70px; border-width: 3px; }
+            .pos-tl { top: 10px; left: 10px; }
+            .pos-tr { top: 10px; right: 10px; }
+            .pos-bl { bottom: 10px; left: 10px; }
+            .pos-br { bottom: 10px; right: 10px; }
         }
     </style>
 </head>
 <body>
 
     <div class="hearts-bg" id="hearts-container"></div>
+    <div id="corner-container"></div>
 
     <div class="card-container" id="page1">
-        <img src="loopy1.jpg" alt="Loopy Cemberut" class="main-char-img">
+        <img src="fotonailongdanloopy.png" alt="Nailong dan Loopy" class="main-char-img">
         
         <h1>Boleh Si Nailong Minta Waktunya Sebentar? 🥺</h1>
-        <p>Halo Tuan Putrinya Loopy... Aku tahu belakangan ini aku bikin kamu sebel, capek, dan mungkin marahnya udah sampai ke ubun-ubun. Lewat halaman kecil ini, aku mau jujur dari hati yang paling dalam...</p>
+        <p>Halo Tuan Putrinya Loopy... Aku tahu belakangan ini aku bikin kamu sebel, capek, dan mungkin marahnya udah sampai ke ubun-ubun. Lewat halaman kecil ini, aku mau jujur dari hati yang paling dalam...<br><br>
+        <span class="memory-text">Ngomong-ngomong, apakah kamu masih ingat pertama kali kita ketemu berdua saat ada acara TPA di Mujahidin Nungso dan kita ketemu pertama pada saat kita sudah dekat di Kunyo? ✨</span></p>
         <button class="btn btn-start" onclick="nextPage()">Buka Surat Untuk Loopy-ku 💖</button>
     </div>
 
@@ -273,7 +315,8 @@
         <p>Sama kayak <span class="highlight">Loopy</span> yang kadang galak tapi sebenernya butuh disayang, aku si <span class="highlight">Nailong</span> ini juga butuh kamu banget. Maafin ego dan kesalahanku ya? Maukah kamu kasih satu kesempatan lagi buat kita ukir cerita lucu bareng-bareng lagi?</p>
         
         <div class="slideshow-wrapper">
-            <img src="fotoromantis1.jpeg" class="slide active" alt="Kenangan 1">
+            <img src="ceweku.png" class="slide active" alt="Cewekku">
+            <img src="fotoromantis1.jpeg" class="slide" alt="Kenangan 1">
             <img src="fotoromantis2.jpeg" class="slide" alt="Kenangan 2">
             <img src="fotoromantis3.jpeg" class="slide" alt="Kenangan 3">
             <img src="fotoromantis4.jpeg" class="slide" alt="Kenangan 4">
@@ -282,7 +325,7 @@
         <p class="caption-text">"Foto-foto ini saksinya kalau kita itu lucu banget pas bareng... ✨"</p>
 
         <div class="buttons-wrapper">
-            <a href="https://wa.me/NOMORANDA?text=Iyaaa%20Nailong,%20Loopy%20maafin%20deh.%20Kita%20baikan%20ya!%20%F0%9F%A5%B0%E2%9D%A4%EF%B8%8F" style="width: 100%; text-decoration: none;">
+            <a href="https://wa.me/+6281936421610?text=Iyaaa%20Nailong,%20Loopy%20maafin%20deh.%20Kita%20baikan%20ya!%20%F0%9F%A5%B0%E2%9D%A4%EF%B8%8F" style="width: 100%; text-decoration: none;">
                 <button class="btn btn-yes">Iya, Aku Maafin & Balikan 🥰</button>
             </a>
             
@@ -308,18 +351,24 @@
             }, 500);
         }
 
-        // --- LOGIK TOMBOL LARI (KHUSUS HP & DESKTOP) ---
+        // --- SOLUSI BUG TOMBOL DI HP ---
         const btnNo = document.getElementById('btnNo');
+        let isDetached = false;
 
         function runaway(e) {
-            // Cegah klik dari layar sentuh
+            // Cegah scroll / klik saat nyentuh
             if(e) e.preventDefault();
 
-            // Ubah posisi jadi fixed agar lari ke seluruh layar (keluar dari kotak)
+            // PENTING: Keluarkan tombol dari card-container agar tidak kena bug clipping/overflow di mobile
+            if (!isDetached) {
+                document.body.appendChild(btnNo);
+                isDetached = true;
+            }
+
             btnNo.style.position = 'fixed';
-            btnNo.style.transform = 'none'; // Reset transform dari CSS sebelumnya
+            btnNo.style.transform = 'none'; 
+            btnNo.style.margin = '0';
             
-            // Area batas agar tombol tidak keluar layar
             const padding = 20;
             const maxX = window.innerWidth - btnNo.offsetWidth - padding;
             const maxY = window.innerHeight - btnNo.offsetHeight - padding;
@@ -331,11 +380,10 @@
             btnNo.style.top = randomY + 'px';
         }
 
-        // PENTING: Gunakan 'touchstart' agar di HP langsung lari sebelum disentuh/diklik!
+        // Trigger super sensitif untuk layar HP
         btnNo.addEventListener('touchstart', runaway, { passive: false });
         btnNo.addEventListener('mouseenter', runaway);
-        // Jaga-jaga kalau dia berhasil klik
-        btnNo.addEventListener('click', runaway);
+        btnNo.addEventListener('click', runaway); // Jika entah bagaimana dia bisa klik
 
         // Slideshow Foto
         function startSlideshow() {
@@ -353,7 +401,7 @@
         // Latar Belakang Hati
         function createHearts() {
             const container = document.getElementById('hearts-container');
-            const heartIcons = ['❤️', '💖', '✨', '🌸', '🦖', '🦦']; // Tambahan emot dinosaurus & berang-berang
+            const heartIcons = ['❤️', '💖', '✨', '🌸', '🦖', '🦦']; 
             setInterval(() => {
                 const heart = document.createElement('div');
                 heart.classList.add('heart-float');
@@ -367,7 +415,40 @@
             }, 400);
         }
 
-        window.onload = createHearts;
+        // --- ANIMASI SUDUT: Semua file GitHub ---
+        function startCornerAnimations() {
+            const container = document.getElementById('corner-container');
+            
+            // Array berisi seluruh file loopy dan nailong dari github kamu
+            const characters = [
+                'loopy1.jpg', 'loopy2.jpg', 'loopy3.jpg', 'loopy4.jpg', 'loopy5.jpg', 'loopy6.jpg', 'loopy7.jpg',
+                'nailong1.jpg', 'nailong2.jpg', 'nailong3.jpg', 'nailong4.jpg', 'nailong5.jpg'
+            ];
+            
+            const positions = ['pos-tl', 'pos-tr', 'pos-br', 'pos-bl'];
+            let currentPosIndex = 0;
+
+            setInterval(() => {
+                const img = document.createElement('img');
+                const randomChar = characters[Math.floor(Math.random() * characters.length)];
+                img.src = randomChar;
+                
+                img.className = `corner-char ${positions[currentPosIndex]}`;
+                container.appendChild(img);
+                
+                currentPosIndex = (currentPosIndex + 1) % positions.length;
+                
+                // Hapus elemen setelah 3.5 detik 
+                setTimeout(() => img.remove(), 3500);
+                
+            }, 2000); // Gambar baru muncul setiap 2 detik
+        }
+
+        // Mulai animasi
+        window.onload = () => {
+            createHearts();
+            startCornerAnimations();
+        };
     </script>
 </body>
 </html>
