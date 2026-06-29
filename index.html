@@ -59,44 +59,6 @@
             100% { transform: translateY(-100vh) scale(1.5) rotate(360deg); opacity: 0; }
         }
 
-        /* --- Animasi Pop-up Karakter di Sudut --- */
-        #corner-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .corner-char {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 20px;
-            border: 4px solid #fff;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            opacity: 0;
-            transform: scale(0);
-            animation: popInOut 3.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        @keyframes popInOut {
-            0% { transform: scale(0) rotate(-15deg); opacity: 0; }
-            15% { transform: scale(1.1) rotate(5deg); opacity: 1; }
-            30% { transform: scale(1) rotate(0deg); opacity: 1; }
-            70% { transform: scale(1) rotate(0deg); opacity: 1; }
-            85% { transform: scale(1.1) rotate(-5deg); opacity: 1; }
-            100% { transform: scale(0) rotate(15deg); opacity: 0; }
-        }
-
-        .pos-tl { top: 20px; left: 20px; transform-origin: top left; }
-        .pos-tr { top: 20px; right: 20px; transform-origin: top right; }
-        .pos-bl { bottom: 20px; left: 20px; transform-origin: bottom left; }
-        .pos-br { bottom: 20px; right: 20px; transform-origin: bottom right; }
-
         /* --- STYLE KARTU UTAMA --- */
         .card-container {
             background: var(--card-bg);
@@ -151,6 +113,7 @@
             border: 4px solid white;
             box-shadow: 0 8px 15px rgba(0,0,0,0.1);
             animation: floatUpDown 3s ease-in-out infinite;
+            transition: opacity 0.3s ease; /* Transisi halus saat gambar berganti */
         }
         .char-couple img:nth-child(2) { animation-delay: 1.5s; }
 
@@ -260,7 +223,6 @@
             background-color: #f1f3f5;
             color: #868e96;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            /* Ukuran fixed agar tidak melebar/rusak saat lari */
             width: 220px !important; 
             height: 50px;
             white-space: nowrap;
@@ -270,7 +232,7 @@
             left: 50%;
             transform: translateX(-50%);
             transition: left 0.15s ease-out, top 0.15s ease-out; 
-            z-index: 9999; /* Pastikan selalu paling atas */
+            z-index: 9999; 
         }
 
         .fade-out { opacity: 0 !important; transform: scale(0.9) translateY(-30px) !important; }
@@ -281,34 +243,26 @@
             .main-char-img { width: 120px; height: 120px; }
             .char-couple img { width: 85px; height: 85px; }
             .slideshow-wrapper { height: 180px; }
-            
-            /* Sudut untuk HP */
-            .corner-char { width: 70px; height: 70px; border-width: 3px; }
-            .pos-tl { top: 10px; left: 10px; }
-            .pos-tr { top: 10px; right: 10px; }
-            .pos-bl { bottom: 10px; left: 10px; }
-            .pos-br { bottom: 10px; right: 10px; }
         }
     </style>
 </head>
 <body>
 
     <div class="hearts-bg" id="hearts-container"></div>
-    <div id="corner-container"></div>
 
     <div class="card-container" id="page1">
         <img src="fotonailongdanloopy.png" alt="Nailong dan Loopy" class="main-char-img">
         
         <h1>Boleh Si Nailong Minta Waktunya Sebentar? 🥺</h1>
         <p>Halo Tuan Putrinya Loopy... Aku tahu belakangan ini aku bikin kamu sebel, capek, dan mungkin marahnya udah sampai ke ubun-ubun. Lewat halaman kecil ini, aku mau jujur dari hati yang paling dalam...<br><br>
-        <span class="memory-text">Ngomong-ngomong, apakah kamu masih ingat pertama kali kita ketemu berdua saat ada acara TPA di Mujahidin Nungso dan kita ketemu pertama pada saat kita sudah dekat di Kunyo? ✨</span></p>
+        <span class="memory-text">coba kamu ingat pertama kali kita ketemu saat ada acara TPA di Mujahidin Nungso dan kita ketemu pertama pada saat kita sudah dekat di Kunyo? kita juga pernah 1 tim osis barengkan?✨</span></p>
         <button class="btn btn-start" onclick="nextPage()">Buka Surat Untuk Loopy-ku 💖</button>
     </div>
 
     <div class="card-container" id="page2" style="display:none; opacity: 0;">
         <div class="char-couple">
-            <img src="nailong1.jpg" alt="Nailong Happy">
-            <img src="loopy2.jpg" alt="Loopy Cute">
+            <img src="nailong1.jpg" alt="Nailong" id="nailong-img">
+            <img src="loopy1.jpg" alt="Loopy" id="loopy-img">
         </div>
         
         <h1>Maafin Aku Ya? 🥺</h1>
@@ -325,7 +279,7 @@
         <p class="caption-text">"Foto-foto ini saksinya kalau kita itu lucu banget pas bareng... ✨"</p>
 
         <div class="buttons-wrapper">
-            <a href="https://wa.me/+6281936421610?text=Iyaaa%20Nailong,%20Loopy%20maafin%20deh.%20Kita%20baikan%20ya!%20%F0%9F%A5%B0%E2%9D%A4%EF%B8%8F" style="width: 100%; text-decoration: none;">
+            <a href="https://wa.me/NOMORANDA?text=Iyaaa%20Nailong,%20Loopy%20maafin%20deh.%20Kita%20baikan%20ya!%20%F0%9F%A5%B0%E2%9D%A4%EF%B8%8F" style="width: 100%; text-decoration: none;">
                 <button class="btn btn-yes">Iya, Aku Maafin & Balikan 🥰</button>
             </a>
             
@@ -356,10 +310,8 @@
         let isDetached = false;
 
         function runaway(e) {
-            // Cegah scroll / klik saat nyentuh
             if(e) e.preventDefault();
 
-            // PENTING: Keluarkan tombol dari card-container agar tidak kena bug clipping/overflow di mobile
             if (!isDetached) {
                 document.body.appendChild(btnNo);
                 isDetached = true;
@@ -380,10 +332,9 @@
             btnNo.style.top = randomY + 'px';
         }
 
-        // Trigger super sensitif untuk layar HP
         btnNo.addEventListener('touchstart', runaway, { passive: false });
         btnNo.addEventListener('mouseenter', runaway);
-        btnNo.addEventListener('click', runaway); // Jika entah bagaimana dia bisa klik
+        btnNo.addEventListener('click', runaway); 
 
         // Slideshow Foto
         function startSlideshow() {
@@ -415,39 +366,36 @@
             }, 400);
         }
 
-        // --- ANIMASI SUDUT: Semua file GitHub ---
-        function startCornerAnimations() {
-            const container = document.getElementById('corner-container');
-            
-            // Array berisi seluruh file loopy dan nailong dari github kamu
-            const characters = [
-                'loopy1.jpg', 'loopy2.jpg', 'loopy3.jpg', 'loopy4.jpg', 'loopy5.jpg', 'loopy6.jpg', 'loopy7.jpg',
-                'nailong1.jpg', 'nailong2.jpg', 'nailong3.jpg', 'nailong4.jpg', 'nailong5.jpg'
-            ];
-            
-            const positions = ['pos-tl', 'pos-tr', 'pos-br', 'pos-bl'];
-            let currentPosIndex = 0;
+        // --- ANIMASI GANTI GAMBAR DI LINGKARAN MERAH ---
+        function startCharacterSwap() {
+            const loopyImages = ['loopy1.jpg', 'loopy2.jpg', 'loopy3.jpg', 'loopy4.jpg', 'loopy5.jpg', 'loopy6.jpg', 'loopy7.jpg'];
+            const nailongImages = ['nailong1.jpg', 'nailong2.jpg', 'nailong3.jpg', 'nailong4.jpg', 'nailong5.jpg'];
+
+            const nailongEl = document.getElementById('nailong-img');
+            const loopyEl = document.getElementById('loopy-img');
 
             setInterval(() => {
-                const img = document.createElement('img');
-                const randomChar = characters[Math.floor(Math.random() * characters.length)];
-                img.src = randomChar;
-                
-                img.className = `corner-char ${positions[currentPosIndex]}`;
-                container.appendChild(img);
-                
-                currentPosIndex = (currentPosIndex + 1) % positions.length;
-                
-                // Hapus elemen setelah 3.5 detik 
-                setTimeout(() => img.remove(), 3500);
-                
-            }, 2000); // Gambar baru muncul setiap 2 detik
+                // Beri efek fade out sesaat
+                if(nailongEl && loopyEl) {
+                    nailongEl.style.opacity = '0';
+                    loopyEl.style.opacity = '0';
+                    
+                    // Ganti file gambar dan kembalikan opasitasnya setelah 300ms
+                    setTimeout(() => {
+                        nailongEl.src = nailongImages[Math.floor(Math.random() * nailongImages.length)];
+                        loopyEl.src = loopyImages[Math.floor(Math.random() * loopyImages.length)];
+                        
+                        nailongEl.style.opacity = '1';
+                        loopyEl.style.opacity = '1';
+                    }, 300);
+                }
+            }, 3000); // Berganti secara acak setiap 3 detik
         }
 
         // Mulai animasi
         window.onload = () => {
             createHearts();
-            startCornerAnimations();
+            startCharacterSwap();
         };
     </script>
 </body>
